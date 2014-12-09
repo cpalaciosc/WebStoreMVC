@@ -1,0 +1,195 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    max-width: 280px;
+}
+
+th, td{
+    text-align: center;
+
+}
+
+input[type=file]{
+    border: none;
+    width: 300px;
+}
+
+input#srch-term{
+    max-width: initial;
+    width: 400px;
+}
+
+.add-on .input-group-btn > .btn {
+  border-left-width:0;left:-2px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+/* stop the glowing blue shadow */
+.add-on .form-control:focus {
+ box-shadow:none;
+ -webkit-box-shadow:none; 
+ border-color:#cccccc; 
+}
+/*
+    .products {
+    float: left;
+    width: 100%;
+}
+
+.product-container{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    overflow: hidden;
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 150px;
+    word-spacing: normal;
+    letter-spacing: normal;
+    zoom: 1;
+    width: 100%;
+}
+
+
+
+.result-list{
+    margin: 0 0 0 4px;
+    padding: 0;
+    word-spacing: -4px;
+    letter-spacing: -4px;
+    line-height: 1.25;
+    color: #aaa;
+}
+
+.result-item{
+    width: 33.33333%;
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+    word-spacing: normal;
+    letter-spacing: normal;
+    padding: 0;
+    margin: 0;
+    zoom: 1;
+    max-width: 1250px;
+    position: relative;
+}
+
+ul li, ol li{
+    word-wrap: break-word;
+}
+*/
+
+div.products{
+    -webkit-column-count: 3; /* Chrome, Safari, Opera */
+    -moz-column-count: 3; /* Firefox */
+    column-count: 3;
+}
+
+.info{
+    display: block;
+    color: #888;
+}
+
+.red{
+    color: #900;
+}
+
+.img-list{
+    width: 100px;
+    height: 100px;
+}
+
+.content{
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+.col-fixed {
+    /* custom width */
+    width:320px;
+}
+.col-min {
+    /* custom min width */
+    min-width:320px;
+}
+.col-max {
+    /* custom max width */
+    max-width:320px;
+}
+
+a.product-link {
+    text-decoration: none;
+    color: #0066c0;
+}
+
+a:hover.product-link{
+    color: #e47911;
+}
+
+span.img-side{
+    display: table;
+    width: 100%;
+    height: 100%;
+}
+
+img.img-list-big{
+    width: 160px;
+    height: 160px;
+}
+
+.product-img-preview{
+    margin-top: 10px;
+}
+
+.label-gris{
+    color: #888;
+}
+
+.label-negra{
+
+}
+
+.negrita{
+    font-weight: bold;
+}
+
+.precio-normal{
+    font-size: 14px;
+}
+.precio{
+    font-size: 17px;
+}

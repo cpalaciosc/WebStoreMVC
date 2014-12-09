@@ -1,0 +1,26 @@
+﻿@model IEnumerable<WebStoreMVC.Models.Producto>
+
+@{
+    ViewBag.Title = "Catálogo de Productos";
+}
+
+<h2>Productos disponibles</h2>
+
+<div class="container">
+    <div class="row row-centered">
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-4 col-md-4 col-centered col-fixed">
+            <div class="item text-center">
+                <div class="content">
+                    <div class="image-container">
+                        @Html.Image(item.imagen, "img-list")
+                    </div>
+                    <span class="info">@Html.ActionLink(item.nombre, "ViewProduct", "ShoppingCart", new { id = item.id }, new { @class = "product-link" })</span>
+                    <span class="info red"><span class="glyphicon glyphicon-euro" aria-hidden="true"></span>@Html.DisplayFor(modelItem => item.precio)</span>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+</div>

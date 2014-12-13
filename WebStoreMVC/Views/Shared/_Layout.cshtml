@@ -24,7 +24,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ShoppingCartSummary("")</li>
-                    <li>@Html.ActionLink("Historial", "About", "Home")</li>
+                    <li>@Html.ActionLink("Historial", "Historial", "Compra")</li>
                 </ul>
                 @Html.Partial("_BuscarPartial")
 
@@ -35,9 +35,11 @@
     <div class="container body-content row-centered">
         @RenderBody()
         <hr />
-        <footer>
-            <p>@Html.ActionLink("Acerca de", "About", "Home") | @Html.ActionLink("Contacto", "Contact", "Home")</p>
-            <p>&copy; @DateTime.Now.Year - MIW - UPM</p>
+        <footer class="navbar navbar-inverse navbar-fixed-bottom separator">
+            <p class="footer-spacing">
+                @Html.ActionLink("Administración", "Index", "Producto") | @Html.ActionLink("Requisitos", "ProjectDetails", "Home")
+            </p>
+            <p>&copy; @DateTime.Now.Year - Carlos Palacios Contreras - MIW - UPM</p>
         </footer>
     </div>
 

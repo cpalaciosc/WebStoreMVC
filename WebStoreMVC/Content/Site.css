@@ -50,55 +50,6 @@ input#srch-term{
  -webkit-box-shadow:none; 
  border-color:#cccccc; 
 }
-/*
-    .products {
-    float: left;
-    width: 100%;
-}
-
-.product-container{
-    padding-top: 10px;
-    padding-bottom: 10px;
-    overflow: hidden;
-    float: left;
-    margin-left: 10px;
-    margin-right: 10px;
-    height: 150px;
-    word-spacing: normal;
-    letter-spacing: normal;
-    zoom: 1;
-    width: 100%;
-}
-
-
-
-.result-list{
-    margin: 0 0 0 4px;
-    padding: 0;
-    word-spacing: -4px;
-    letter-spacing: -4px;
-    line-height: 1.25;
-    color: #aaa;
-}
-
-.result-item{
-    width: 33.33333%;
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
-    word-spacing: normal;
-    letter-spacing: normal;
-    padding: 0;
-    margin: 0;
-    zoom: 1;
-    max-width: 1250px;
-    position: relative;
-}
-
-ul li, ol li{
-    word-wrap: break-word;
-}
-*/
 
 div.products{
     -webkit-column-count: 3; /* Chrome, Safari, Opera */
@@ -192,4 +143,37 @@ img.img-list-big{
 }
 .precio{
     font-size: 17px;
+}
+
+.div-spacing{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.footer-spacing{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+
+.separator{
+    border-top: 1px solid #e5e5e5;
+}
+
+footer p{
+    margin: 0;
+    color:#999; 
+}
+
+footer a{
+    color: #999;
+    text-decoration: none;
+    line-height: 20px;
+}
+
+footer a:hover{
+    color: #fff;
+    text-decoration: none;
+    background-color: transparent;
+
 }

@@ -2,133 +2,135 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Data.Entity.Validation;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
-using WebStoreMVC.Helpers;
 using WebStoreMVC.Models;
+using WebStoreMVC.Models.ShoppingCart;
 
 namespace WebStoreMVC.Controllers
 {
-    [Authorize(Users = "admin@miw.com")]
-    public class ProductoController : Controller
+    public class CompraController : Controller
     {
         private WebStoreDBEntities db = new WebStoreDBEntities();
 
-        // GET: Producto
-        public ActionResult Index()
+        //GET: Compra/Historial
+        [Authorize]
+        [HttpGet]
+        public ActionResult Historial()
         {
-            return View(db.Producto.ToList());
+            var query = from compra in db.Compra
+                        join detalle in db.CompraDetalle on compra.id equals detalle.id_compra
+                        join producto in db.Producto on detalle.id_producto equals producto.id
+                        where compra.username.Equals(User.Identity.Name)
+                        select new HistorialCompraModel
+                        {
+                            Producto = producto,
+                            Compra = compra,
+                            Detalle = detalle
+                        };
+
+            return View(query.ToList());
         }
 
-        // GET: Producto/Details/5
+        // GET: Compra
+        public ActionResult Index()
+        {
+            return View(db.Compra.ToList());
+        }
+
+        // GET: Compra/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Producto producto = db.Producto.Find(id);
-            if (producto == null)
+            Compra compra = db.Compra.Find(id);
+            if (compra == null)
             {
                 return HttpNotFound();
             }
-            return View(producto);
+            return View(compra);
         }
 
-        // GET: Producto/Create
+        // GET: Compra/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Producto/Create
+        // POST: Compra/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,nombre,descripcion,precio,imagen")] Producto producto, HttpPostedFileBase file)
+        public ActionResult Create([Bind(Include = "id,username,fecha")] Compra compra)
         {
-
             if (ModelState.IsValid)
             {
-                var imagen = FileUtil.uploadFileToByteArray(file);
-                if(imagen!=null)
-                {
-                    producto.imagen = imagen;
-                }
-                db.Producto.Add(producto);
+                db.Compra.Add(compra);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-
-            return View(producto);
+            return View(compra);
         }
 
-        // GET: Producto/Edit/5
+        // GET: Compra/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Producto producto = db.Producto.Find(id);
-            if (producto == null)
+            Compra compra = db.Compra.Find(id);
+            if (compra == null)
             {
                 return HttpNotFound();
             }
-            return View(producto);
+            return View(compra);
         }
 
-        // POST: Producto/Edit/5
+        // POST: Compra/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,nombre,descripcion,precio,imagen")] Producto producto, HttpPostedFileBase file)
+        public ActionResult Edit([Bind(Include = "id,username,fecha")] Compra compra)
         {
             if (ModelState.IsValid)
             {
-                var imagen = FileUtil.uploadFileToByteArray(file);
-                if (imagen != null)
-                {
-                    producto.imagen = imagen;
-                }
-                db.Entry(producto).State = EntityState.Modified;
+                db.Entry(compra).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(producto);
+            return View(compra);
         }
 
-        // GET: Producto/Delete/5
+        // GET: Compra/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Producto producto = db.Producto.Find(id);
-            if (producto == null)
+            Compra compra = db.Compra.Find(id);
+            if (compra == null)
             {
                 return HttpNotFound();
             }
-            return View(producto);
+            return View(compra);
         }
 
-        // POST: Producto/Delete/5
+        // POST: Compra/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Producto producto = db.Producto.Find(id);
-            db.Producto.Remove(producto);
+            Compra compra = db.Compra.Find(id);
+            db.Compra.Remove(compra);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -141,6 +143,5 @@ namespace WebStoreMVC.Controllers
             }
             base.Dispose(disposing);
         }
-
     }
 }

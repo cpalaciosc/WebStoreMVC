@@ -59,9 +59,43 @@ namespace WebStoreMVC.Helpers
                 display = "hidden";
             }
 
-            string stringHtml = "<button type='submit' class='btn btn-primary " + display + "' role='button'>" +
+            string stringHtml = "<a href='/ShoppingCart/Purchase' class='btn btn-primary " + display + "'>" +
                           "<span class='glyphicon glyphicon-shopping-cart'></span>"+message+
-                          "</button>";
+                          "</a>";
+
+            return new MvcHtmlString(stringHtml);
+        }
+
+        public static MvcHtmlString DeleteButton(this HtmlHelper html, int id)
+        {
+            string stringHtml = "<a href='/ShoppingCart/Delete/"+id+"' class='btn btn-danger btn-xs'>" +
+                                "<span class='glyphicon glyphicon-remove' aria-hidden='true'></span> Eliminar" +
+                                "</a>";
+
+            return new MvcHtmlString(stringHtml);
+        }
+
+        public static MvcHtmlString PurchaseFinishMessage(this HtmlHelper html, string result)
+        {
+            string stringHtml = "";
+
+            if (result.Equals("True"))
+            {
+                stringHtml = "<div class='alert alert-success div-spacing' role='alert'>"+
+                    "<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>"+
+                    "<span class='sr-only'>Mensaje:</span>"+
+                    "Compra registrada con exito"+
+                    "</div>";
+            }
+            else
+            {
+                stringHtml = "<div class='alert alert-danger div-spacing' role='alert'>" +
+                    "<span class='glyphicon glyphicon-exclamation-sign' aria-hidden='true'></span>" +
+                    "<span class='sr-only'>Error:</span>" +
+                    "No se pudo registrar la compra. Consulte con el Admininstrador." +
+                    "</div>";
+            }
+    
 
             return new MvcHtmlString(stringHtml);
         }

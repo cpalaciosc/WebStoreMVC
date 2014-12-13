@@ -5,61 +5,78 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<table class="table">
-    <tr>
-        <th>
-            Producto
-        </th>
-        <th>
-            Precio Unitario
-        </th>
-        <th>
-            Cantidad
-        </th>
-        <th>
-            Total
-        </th>
-        <th></th>
-    </tr>
+@if (ViewBag.ShoppingCart.empty)
+{
+    <div class="alert alert-info div-spacing" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        <span class="sr-only">Mensaje:</span>
+        Aún no ha añadido productos a la cesta
+    </div>
+}
 
-    @foreach (var item in (ViewBag.ShoppingCart as ICollection<Item>))
-    {
+else
+{
+    <table class="table table-hover">
         <tr>
-            <td>
-                @item.item.nombre
-            </td>
-            <td>
-               <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
-               @String.Format("{0:0.00}", item.item.precio)
-            </td>
-            <td>
-                @item.cantidad
-            </td>
-            <td>
-                <span class="precio-normal negrita">
+            <th>
+                Producto
+            </th>
+            <th>
+                Precio Unitario
+            </th>
+            <th>
+                Cantidad
+            </th>
+            <th>
+                Total
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in (ViewBag.ShoppingCart as ICollection<Item>))
+        {
+            <tr>
+                <td>
+                    @item.item.nombre
+                </td>
+                <td>
                     <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
-                    @String.Format("{0:0.00}",@item.total)
+                    @String.Format("{0:0.00}", item.item.precio)
+                </td>
+                <td>
+                    @item.cantidad
+                </td>
+                <td>
+                    <span class="precio-normal negrita">
+                        <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+                        @String.Format("{0:0.00}", @item.total)
+                    </span>
+                </td>
+                <td>
+                    @Html.DeleteButton(@item.item.id)
+                </td>
+            </tr>
+        }
+        <tr>
+            <td colspan="4" class="text-right negrita">
+                Subtotal (@ViewBag.ShoppingCart.cantidad productos)
+            </td>
+            <td>
+                <span class="precio-normal red negrita">
+                    <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
+                    @String.Format("{0:0.00}", ViewBag.ShoppingCart.total)
                 </span>
             </td>
-            <td></td>
         </tr>
-    }
-    <tr>
-        <td colspan="3" class="text-right negrita">
-            Subtotal (@ViewBag.ShoppingCart.cantidad productos)
-        </td>
-        <td>
-            <span class="precio-normal red negrita">
-                <span class="glyphicon glyphicon-euro" aria-hidden="true"></span>
-                @String.Format("{0:0.00}",ViewBag.ShoppingCart.total)
-            </span>
-        </td>
-    </tr>
 
-</table>
+    </table>
+
+}
 
 
-<div class="pull-right">
+
+
+<div class="pull-right div-spacing">
     @Html.CheckoutButton("Terminar pedido?")
     @Html.ActionLink("Añadir más", "Catalog", "ShoppingCart", null, new { @class = "btn btn-warning", @role="button" })
 </div>

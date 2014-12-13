@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'c:\users\cpalacios\documents\visual studio 2013\Projects\WebStoreMVC\WebStoreMVC\Models\DataModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\cpalacios\Documents\Visual Studio 2013\Projects\WebStoreMVC\WebStoreMVC\Models\DataModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

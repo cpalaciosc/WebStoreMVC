@@ -15,7 +15,7 @@ namespace WebStoreMVC.Models
     public class ProductoMetaData
     {
         [Required]
-        [Display(Name="Nombre")]
+        [Display(Name="Producto")]
         public object nombre;
 
         [Display(Name = "Descripción")]

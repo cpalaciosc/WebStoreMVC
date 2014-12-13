@@ -25,7 +25,7 @@ namespace WebStoreMVC.Models.ShoppingCart
             return new Item { item = item, cantidad = cantidad };
         }
 
-        private Producto ProductoSeleccionado(int id)
+        private Producto ProductoSeleccionado(int? id)
         {
             if (id == null)
             {

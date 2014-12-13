@@ -18,24 +18,6 @@ namespace WebStoreMVC.Controllers
             return RedirectToAction("Catalog", "ShoppingCart");
         }
 
-
-        // GET: Producto/Edit/5
-        /*
-        public ActionResult Show(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Producto producto = db.Producto.Find(id);
-            if (producto == null)
-            {
-                return HttpNotFound();
-            }
-            return View(producto);
-        }
-         * */
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -43,9 +25,9 @@ namespace WebStoreMVC.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult ProjectDetails()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Características implementadas";
 
             return View();
         }

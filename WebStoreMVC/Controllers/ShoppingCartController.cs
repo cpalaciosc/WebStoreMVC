@@ -16,6 +16,9 @@ namespace WebStoreMVC.Controllers
 
         public ActionResult Catalog()
         {
+            string purchaseResult = Request.QueryString["result"];
+            if (purchaseResult != null)
+                ViewBag.ResultadoCompra = purchaseResult;
             return View(db.Producto.ToList());
         }
 
@@ -55,7 +58,7 @@ namespace WebStoreMVC.Controllers
         // POST: ShoppingCart/Checkout
         public ActionResult Checkout([ModelBinder(typeof(ItemModelBinder))] Item item)
         {
-            ViewBag.ShoppingCart = UpdateShoppingCart(item);
+            ViewBag.ShoppingCart = AddToShoppingCart(item);
             return View();
         }
 
@@ -63,23 +66,63 @@ namespace WebStoreMVC.Controllers
         // GET: ShoppingCart/Checkout
         public ActionResult Checkout()
         {
-            ViewBag.ShoppingCart = UpdateShoppingCart();
+            ViewBag.ShoppingCart = AddToShoppingCart();
             return View();
         }
 
-        private ShoppingCart UpdateShoppingCart(Item item = null)
+        [Authorize]
+        // GET: ShoppingCart/Checkout
+        public ActionResult Purchase()
         {
-            ShoppingCart shoppingCart = Session.GetDataFromSession<ShoppingCart>("shoppingCart");
-            if(item!=null)
+            bool resultado = SaveShoppingCart();
+            return RedirectToAction("Catalog", new { result = resultado.ToString()});
+        }
+
+        // GET: ShoppingCart/Delete/5
+        [Authorize]
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
             {
-                shoppingCart.Add(item);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var groupedShopiingCart = shoppingCart.GroupBy(i => i.item);
-            
+            RemoveFromShoppingCart(id);
+
+            return RedirectToAction("Checkout");
+        }
+
+        private ShoppingCart AddToShoppingCart(Item item = null)
+        {
+            ShoppingCart shoppingCart = Session.GetDataFromSession<ShoppingCart>("shoppingCart");
+            if (item != null)
+            {
+                shoppingCart.AddItem(item);
+            }
+
             Session.SetDataToSession<ShoppingCart>("shoppingCart", shoppingCart);
 
             return shoppingCart;
+        }
+
+        private void RemoveFromShoppingCart(int? itemId)
+        {
+            ShoppingCart shoppingCart = Session.GetDataFromSession<ShoppingCart>("shoppingCart");
+            if (itemId != null)
+            {
+                shoppingCart.RemoveAll(itemRemove => itemRemove.item.id == itemId);
+            }
+
+            Session.SetDataToSession<ShoppingCart>("shoppingCart", shoppingCart);
+
+        }
+
+        private Boolean SaveShoppingCart()
+        {
+            ShoppingCart shoppingCart = Session.GetDataFromSession<ShoppingCart>("shoppingCart");
+            shoppingCart.username = User.Identity.Name;
+            return shoppingCart.Save();
         }
 
     }

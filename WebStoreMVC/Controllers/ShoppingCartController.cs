@@ -10,6 +10,7 @@ using WebStoreMVC.Models.ShoppingCart;
 
 namespace WebStoreMVC.Controllers
 {
+    [HandleError()]
     public class ShoppingCartController : Controller
     {
         private WebStoreDBEntities db = new WebStoreDBEntities();
@@ -19,7 +20,12 @@ namespace WebStoreMVC.Controllers
             string purchaseResult = Request.QueryString["result"];
             if (purchaseResult != null)
                 ViewBag.ResultadoCompra = purchaseResult;
-            return View(db.Producto.ToList());
+
+            var query = from producto in db.Producto
+                        where producto.estado.Equals("A")
+                        select producto;
+
+            return View(query.ToList());
         }
 
         [HttpPost]
@@ -29,6 +35,7 @@ namespace WebStoreMVC.Controllers
             ViewBag.Message = producto;
             var productos = from prod in db.Producto
                             where prod.nombre.Contains(producto)
+                            where prod.estado.Equals("A")
                             select prod;
 
 

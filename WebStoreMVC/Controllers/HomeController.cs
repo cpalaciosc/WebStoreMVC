@@ -9,6 +9,7 @@ using WebStoreMVC.Models;
 
 namespace WebStoreMVC.Controllers
 {
+    [HandleError()]
     public class HomeController : Controller
     {
         private WebStoreDBEntities db = new WebStoreDBEntities();

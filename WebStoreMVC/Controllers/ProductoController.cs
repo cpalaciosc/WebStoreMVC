@@ -16,6 +16,7 @@ using WebStoreMVC.Models;
 namespace WebStoreMVC.Controllers
 {
     [Authorize(Users = "admin@miw.com")]
+    [HandleError()]
     public class ProductoController : Controller
     {
         private WebStoreDBEntities db = new WebStoreDBEntities();
@@ -62,6 +63,7 @@ namespace WebStoreMVC.Controllers
                 {
                     producto.imagen = imagen;
                 }
+                producto.estado = "A";
                 db.Producto.Add(producto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -96,11 +98,16 @@ namespace WebStoreMVC.Controllers
             if (ModelState.IsValid)
             {
                 var imagen = FileUtil.uploadFileToByteArray(file);
+                db.Entry(producto).State = EntityState.Modified;
                 if (imagen != null)
                 {
                     producto.imagen = imagen;
+                    db.Entry(producto).Property(e => e.imagen).IsModified = true;
                 }
-                db.Entry(producto).State = EntityState.Modified;
+                else
+                {
+                    db.Entry(producto).Property(e => e.imagen).IsModified = false;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -128,7 +135,8 @@ namespace WebStoreMVC.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Producto producto = db.Producto.Find(id);
-            db.Producto.Remove(producto);
+            producto.estado = "I";
+            db.Entry(producto).State = EntityState.Modified;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -141,6 +149,5 @@ namespace WebStoreMVC.Controllers
             }
             base.Dispose(disposing);
         }
-
     }
 }

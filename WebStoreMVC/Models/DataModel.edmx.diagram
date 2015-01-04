@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7bf318ec2f8a412f8234af8402c1ac49" Name="Diagram1">
-        <EntityTypeShape EntityType="Models.Compra" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.CompraDetalle" Width="1.5" PointX="3" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Models.Producto" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Compra" Width="1.5" PointX="0.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.CompraDetalle" Width="1.5" PointX="3" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Models.Producto" Width="1.5" PointX="5.625" PointY="0.5" IsExpanded="true" />
         <AssociationConnector Association="Models.FK_CompraDetalle_Compra" ManuallyRouted="false" />
         <AssociationConnector Association="Models.FK_CompraDetalle_Producto" ManuallyRouted="false" />
       </Diagram>

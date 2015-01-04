@@ -24,6 +24,7 @@ namespace WebStoreMVC.Models
         public string descripcion { get; set; }
         public decimal precio { get; set; }
         public byte[] imagen { get; set; }
+        public string estado { get; set; }
     
         public virtual ICollection<CompraDetalle> CompraDetalle { get; set; }
     }

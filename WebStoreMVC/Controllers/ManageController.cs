@@ -11,6 +11,7 @@ using WebStoreMVC.Models;
 namespace WebStoreMVC.Controllers
 {
     [Authorize]
+    [HandleError()]
     public class ManageController : Controller
     {
         public ManageController()

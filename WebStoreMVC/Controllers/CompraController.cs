@@ -11,6 +11,7 @@ using WebStoreMVC.Models.ShoppingCart;
 
 namespace WebStoreMVC.Controllers
 {
+    [HandleError()]
     public class CompraController : Controller
     {
         private WebStoreDBEntities db = new WebStoreDBEntities();

@@ -172,6 +172,7 @@
     <Compile Include="Helpers\FileUtil.cs" />
     <Compile Include="Helpers\HtmlExtensions.cs" />
     <Compile Include="Helpers\SessionExtensions.cs" />
+    <Compile Include="Helpers\StringHelper.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Compra.cs">
       <DependentUpon>DataModel.tt</DependentUpon>
@@ -327,7 +328,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>54503</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:53070/</IISUrl>
+          <IISUrl>http://localhost:53071/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

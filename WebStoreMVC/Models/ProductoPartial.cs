@@ -27,5 +27,8 @@ namespace WebStoreMVC.Models
         [Display(Name = "Imagen")]
         public HttpPostedFileBase imagen {get; set;}
 
+        [Display(Name = "Estado")]
+        public HttpPostedFileBase estado { get; set; }
+
     }
 }

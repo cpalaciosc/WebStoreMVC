@@ -13,6 +13,7 @@ using WebStoreMVC.Models;
 namespace WebStoreMVC.Controllers
 {
     [Authorize]
+    [HandleError()]
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
